@@ -12,6 +12,7 @@ class _AssetsMediaPageState extends State<AssetsMediaPage> {
   final AudioPlayer player = AudioPlayer();
   bool isPlaying = false;
   int currentPosition = 0;
+  int _currentIndex = 0; // State untuk mengontrol tab BottomNavigationBar
 
   void playAudio() async {
     if (isPlaying) {
@@ -70,6 +71,25 @@ class _AssetsMediaPageState extends State<AssetsMediaPage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          // Logika navigasi saat tab diklik
+          if (index == 1) {
+            Navigator.pushNamed(context, '/detail');
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.video_library),
+            label: 'Video',
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
