@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-// import 'column_widget.dart';
-// import 'row_widget.dart';
-import 'first_widget.dart';
+import 'providers/product_provider.dart';
+import 'views/product_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,13 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Praktikum Mobile Lanjut',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (_) => ProductProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Praktikum Arsitektur Aplikasi',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        ),
+        home: const ProductListView(),
       ),
-      home: const FirstWidget(), // Ganti sesuai widget yang ingin ditampilkan (ColumnWidget / RowWidget / FirstWidget)
     );
   }
 }
